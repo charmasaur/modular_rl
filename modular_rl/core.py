@@ -546,7 +546,7 @@ class ConcatFixedStd(Layer):
     def get_output_shape_for(self, input_shape):
         return (input_shape[0], input_shape[1] * 2)
 
-    def call(self, x, mask):
+    def call(self, x, mask=None):
         Mean = x
         Std = T.repeat(T.exp(self.logstd)[None, :], Mean.shape[0], axis=0)
         return T.concatenate([Mean, Std], axis=1)
