@@ -19,6 +19,8 @@ if __name__ == "__main__":
     parser.add_argument("--plot",action="store_true")
     args,_ = parser.parse_known_args([arg for arg in sys.argv[1:] if arg not in ('-h', '--help')])
     env = make(args.env)
+    # Hack to get pyglet imported before Theano does its stuff.
+    env.render()
     env_spec = env.spec
     mondir = args.outfile + ".dir"
     if os.path.exists(mondir): shutil.rmtree(mondir)
